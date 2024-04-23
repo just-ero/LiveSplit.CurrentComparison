@@ -1,8 +1,9 @@
-﻿using LiveSplit.Model;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
+
+using LiveSplit.Model;
 
 namespace LiveSplit.UI.Components
 {
@@ -55,17 +56,17 @@ namespace LiveSplit.UI.Components
             chkOverrideTimeColor.CheckedChanged += chkOverrideTimeColor_CheckedChanged;
         }
 
-        void chkOverrideTimeColor_CheckedChanged(object sender, EventArgs e)
+        private void chkOverrideTimeColor_CheckedChanged(object sender, EventArgs e)
         {
             label2.Enabled = btnTimeColor.Enabled = chkOverrideTimeColor.Checked;
         }
 
-        void chkOverrideTextColor_CheckedChanged(object sender, EventArgs e)
+        private void chkOverrideTextColor_CheckedChanged(object sender, EventArgs e)
         {
             label1.Enabled = btnTextColor.Enabled = chkOverrideTextColor.Checked;
         }
 
-        void CurrentComponentSettings_Load(object sender, EventArgs e)
+        private void CurrentComponentSettings_Load(object sender, EventArgs e)
         {
             chkOverrideTextColor_CheckedChanged(null, null);
             chkOverrideTimeColor_CheckedChanged(null, null);
@@ -84,7 +85,7 @@ namespace LiveSplit.UI.Components
             }
         }
 
-        void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnColor1.Visible = cmbGradientType.SelectedItem.ToString() != "Plain";
             btnColor2.DataBindings.Clear();
@@ -112,7 +113,10 @@ namespace LiveSplit.UI.Components
             return parent;
         }
 
-        public int GetSettingsHashCode() => CreateSettingsNode(null, null);
+        public int GetSettingsHashCode()
+        {
+            return CreateSettingsNode(null, null);
+        }
 
         private int CreateSettingsNode(XmlDocument document, XmlElement parent)
         {
